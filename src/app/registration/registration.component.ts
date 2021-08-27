@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl, Validators } from '@angular/forms';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-registration',
@@ -8,10 +9,10 @@ import { FormGroup,FormControl, Validators } from '@angular/forms';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _services:UsersService) { }
   genders =["male","female"]
   
-  registeredUsernames:Array<any> =['Testuser1','Testuser2']
+  // registeredUsers:Array<any> =[]
   registerform: FormGroup;
 
   ngOnInit(): void {
@@ -25,8 +26,8 @@ export class RegistrationComponent implements OnInit {
   }
   onRegister(){
    console.log(this.registerform.value)
-   this.registeredUsernames.push(this.registerform.value)
-   console.log(this.registeredUsernames)
+   this._services.registeredUsers.push(this.registerform.value)
+   this._services.reg_users()
   }
 
 }
